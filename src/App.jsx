@@ -1,10 +1,10 @@
 // src/App.jsx
 import NavBar from "./Components/Navigation/NavBar";
-import ClientList from "./Components/Clients/ClientList";
-import Employees from "./Components/Employees/Employees";
-import RateCard from "./Components/RateCard/RateCard";
-import Contracts from "./Components/Contracts/Contracts";
-import Contact from "./Components/Contact/Contact";
+import ClientList from "./Components/Clients/ClientsList";
+// import Employees from "./Components/Employees/Employees";
+// import RateCard from "./Components/RateCard/RateCard";
+// import Contracts from "./Components/Contracts/Contracts";
+// import Contact from "./Components/Contact/Contact";
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
       <section id="clients">
         <ClientList />
       </section>
-      <section id="employees">
+      {/* <section id="employees">
         <Employees />
       </section>
       <section id="rating">
@@ -35,7 +35,7 @@ function App() {
       </section>
       <section id="contact">
         <Contact />
-      </section>
+      </section> */}
     </div>
   );
 }
