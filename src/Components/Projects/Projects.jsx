@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 
-function Projects() {
+function Projects({ name }) {
   const [projects, setProjects] = useState([]);
 
   // Simulate fetching projects from backend with dummy data fallback
+  //fetch projects by name... Not all projects
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch("https://your-api.com/projects"); // Replace with actual API endpoint
+        const response = await fetch(
+          `http://localhost:8080/api/projects/getAllProjects/${name}`
+        ); // Replace with actual API endpoint
         const data = await response.json();
         setProjects(data);
       } catch (error) {
