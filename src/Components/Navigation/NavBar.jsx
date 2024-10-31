@@ -1,4 +1,3 @@
-// src/components/NavBar.jsx
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 

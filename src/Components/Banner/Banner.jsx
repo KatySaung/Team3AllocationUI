@@ -4,7 +4,7 @@ function Banner() {
       {/* Main Section */}
       <section className="text-center py-10">
         <h1 className="text-4xl font-extrabold text-blue-700 mb-6">
-          PeopleShores Client Allocation System
+          {/* PeopleShores Client Allocation System */}
         </h1>
         <p className="text-lg text-gray-700 max-w-3xl mx-auto">
           Welcome to the Client Allocation System by PeopleShores! Our platform

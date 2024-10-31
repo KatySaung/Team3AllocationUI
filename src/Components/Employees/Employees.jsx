@@ -11,13 +11,15 @@ const EmployeeList = () => {
 
   const fetchEmployees = async () => {
     const response = await axios.get("http://localhost:8080/api/employees");
+    console.log("ALL employees", response.data);
     setEmployees(response.data);
   };
 
   const fetchFreeEmployees = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/employees/free"
+      "http://localhost:8080/api/employees/free-employees"
     );
+    console.log("FREE employees", response.data);
     setEmployees(response.data);
   };
 
@@ -51,7 +53,14 @@ const EmployeeList = () => {
             onClick={() => setSelectedEmployee(employee)}
             className="p-4 border-b cursor-pointer hover:bg-gray-100"
           >
-            {employee.name}
+            <p><strong>Name:</strong> {employee.fullName}</p>
+            <p><strong>Title:</strong> {employee.title}</p>
+            <p><strong>Salary:</strong> ${employee.salary.toFixed(2)}</p>
+            <p><strong>Total Hours Worked:</strong> {employee.totalHoursWorked}</p>
+            <p><strong>Status:</strong> {employee.status ? "Booked" : "Available"}</p>
+            <p><strong>Available From:</strong> {employee.availableFrom}</p>
+            <p><strong>Rate Card:</strong> {employee.rateCardName}</p>
+            <p><strong>Skills:</strong> {employee.skills.join(", ")}</p>
           </li>
         ))}
       </ul>
@@ -81,7 +90,7 @@ export default EmployeeList;
 // function Employees() {
 //   const [employees, setEmployees] = useState([]);
 
-//   // Fetch employee data from backend or use dummy data as fallback
+// Fetch employee data from backend or use dummy data as fallback
 //   useEffect(() => {
 //     const fetchEmployees = async () => {
 //       try {

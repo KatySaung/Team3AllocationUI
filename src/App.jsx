@@ -5,13 +5,13 @@ import RateCard from "./Components/RateCard/RateCard";
 import Contracts from "./Components/Contracts/Contracts";
 import Contact from "./Components/Contact/Contact";
 import Banner from "./Components/Banner/Banner";
-import Invoice from "./Components/Invoice/Invoice";
-
+import InvoiceList from "./Components/Invoice/Invoice";
+import "./App.css";
 function App() {
   return (
     <div className="App">
       <NavBar />
-      <section id="home" className="p-8">
+      <section  id="home" className="p-8 home">
         <h1 className="text-4xl font-extrabold text-center">
           Welcome to People Shores Allocation System
           <Banner />
@@ -35,7 +35,7 @@ function App() {
       <section id="contracts">
         <Contracts />
       </section>
-      <Invoice />
+      <InvoiceList />
       <section id="contact">
         <Contact />
       </section>

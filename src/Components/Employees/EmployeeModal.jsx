@@ -12,7 +12,7 @@ const EmployeeModal = ({ employee, onClose, onUpdate }) => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/employees/${employee.id}`, formData);
+      await axios.put(`http://localhost:8080/api/employees/${employee.id}`, formData);
       onUpdate();
       onClose();
     } catch (error) {
@@ -22,7 +22,7 @@ const EmployeeModal = ({ employee, onClose, onUpdate }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/api/employees/${employee.id}`);
+      await axios.delete(`http://localhost:8080/api/employees/${employee.id}`);
       onUpdate();
       onClose();
     } catch (error) {
