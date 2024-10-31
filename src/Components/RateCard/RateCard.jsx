@@ -7,7 +7,7 @@ function RateCard() {
   useEffect(() => {
     const fetchRateCards = async () => {
       try {
-        const response = await fetch("https:///employees/rates"); // Replace with actual API endpoint
+        const response = await fetch("https:/api.exmaple"); // Replace with actual API endpoint
         const data = await response.json();
         setRateCards(data);
       } catch (error) {

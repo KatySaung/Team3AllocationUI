@@ -1,6 +1,9 @@
-import React from "react";
+
 
 function Invoice() {
+
+
+
   return (
     <div className="invoive__container">
       <h1 className="invoice__title">Invoice</h1>
@@ -9,7 +12,7 @@ function Invoice() {
       <div className="invoive__billingAmount">billingAmount</div>
       <p className="invoive__paymentStatus"></p>
       <div className="invoive__billingPeriod">billingPeriod</div>
-      <p>and more stuff</p>
+      <p>and more stuff to add and create </p>
     </div>
   );
 }

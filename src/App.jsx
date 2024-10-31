@@ -1,4 +1,3 @@
-// src/App.jsx
 import NavBar from "./Components/Navigation/NavBar";
 import ClientList from "./Components/Clients/ClientsList";
 import Employees from "./Components/Employees/Employees";
@@ -6,6 +5,7 @@ import RateCard from "./Components/RateCard/RateCard";
 import Contracts from "./Components/Contracts/Contracts";
 import Contact from "./Components/Contact/Contact";
 import Banner from "./Components/Banner/Banner";
+import Invoice from "./Components/Invoice/Invoice";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <section id="home" className="p-8">
         <h1 className="text-4xl font-extrabold text-center">
           Welcome to People Shores Allocation System
-          <Banner/>
+          <Banner />
         </h1>
       </section>
       <section id="about" className="p-8 bg-gray-100">
@@ -35,6 +35,7 @@ function App() {
       <section id="contracts">
         <Contracts />
       </section>
+      <Invoice />
       <section id="contact">
         <Contact />
       </section>
