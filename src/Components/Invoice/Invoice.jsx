@@ -6,7 +6,7 @@ import CreateInvoiceForm from "./CreateInvoiceForm";
 const Invoice = () => {
   const [projects, setProjects] = useState([]);
   const [selectedProjects, setSelectedProjects] = useState([]);
-
+  
   useEffect(() => {
     // Fetch available projects
     const fetchProjects = async () => {

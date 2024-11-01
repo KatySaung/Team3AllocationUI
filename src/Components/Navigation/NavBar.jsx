@@ -6,18 +6,18 @@ function NavBar() {
   const routerLocation = useLocation();
   const [currentMonthRevenue, setCurrentMonthRevenue] = useState(0);
   const [lastMonthRevenue, setLastMonthRevenue] = useState(0);
-
+  const [revInput, setRevInput] = useState(10);
 
   const fetchRevenues = async () => {
     try {
       //! Fetching monthly revenues
       const lastMonthResp = await axios.get(
-        "http://localhost:8080/api/invoice/revenue/last-month"
+        `http://localhost:8080/api/invoice/calculate_revenue/10`
       );
       setLastMonthRevenue(lastMonthResp.data);
 
       const currentMonthResp = await axios.get(
-        "http://localhost:8080/api/invoice/revenue/current-month"
+        `http://localhost:8080/api/invoice/calculate_revenue/10`
       );
       setCurrentMonthRevenue(currentMonthResp.data);
     } catch (error) {

@@ -35,6 +35,27 @@ const ClientModal = ({ client, onClose }) => {
             onChange={handleChange}
             className="border p-2 mb-2 w-full"
           />
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className="border p-2 mb-2 w-full"
+          />
+          <input
+            type="text"
+            name="PhoneNumber"
+            value={formData.phoneNumber}
+            onChange={handleChange}
+            className="border p-2 mb-2 w-full"
+          />
+          <input
+            type="text"
+            name="address"
+            value={formData.address}
+            onChange={handleChange}
+            className="border p-2 mb-2 w-full"
+          />
           {/* Add other fields similarly */}
           <button type="submit" className="bg-blue-500 text-white p-2 rounded">
             Save

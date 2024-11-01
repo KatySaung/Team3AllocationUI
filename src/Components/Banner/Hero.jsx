@@ -1,10 +1,10 @@
 import "./Hero.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 const Hero = () => {
   const navigate = useNavigate();
 
   const handleNavigation = () => {
-    navigate('/home'); // This route should match the section you want to show
+    navigate("/home");
   };
 
   return (
@@ -12,7 +12,10 @@ const Hero = () => {
       <div className="hero-overlay">
         <div className="hero-content">
           <h1>Welcome to PeopleGrid</h1>
-          <p>Your ultimate solution for resource allocation, skill matching, and project management.</p>
+          <p>
+            Your ultimate solution for resource allocation, skill matching, and
+            project management.
+          </p>
           <button onClick={handleNavigation} className="cta-button">
             Get Started
           </button>
@@ -21,6 +24,5 @@ const Hero = () => {
     </section>
   );
 };
-
 
 export default Hero;

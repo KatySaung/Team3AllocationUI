@@ -1,4 +1,3 @@
-// src/components/ClientList.jsx
 import { useClientContext } from "./ClientContext";
 import { useState } from "react";
 import ClientModal from "./ClientModal";
@@ -42,6 +41,7 @@ const ClientList = () => {
             className="p-4 border-b cursor-pointer hover:bg-gray-100"
           >
             {client.businessName}
+            <p>Phone number: {client.phoneNumber}</p>
           </li>
         ))}
       </ul>
@@ -61,4 +61,3 @@ const ClientList = () => {
 };
 
 export default ClientList;
-
