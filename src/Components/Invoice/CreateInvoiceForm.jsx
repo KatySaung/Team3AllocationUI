@@ -5,6 +5,8 @@ const CreateInvoiceForm = ({ selectedProjects }) => {
   const [billingDate, setBillingDate] = useState("");
   const [paymentStatus, setPaymentStatus] = useState(false);
   const [totalAmount, setTotalAmount] = useState(0);
+  const [billingAmount, setBillingAmount] = useState(0);
+  const [billingPeriod, setBillingPeriod] = useState("");
 
   useEffect(() => {
     // Calculate total amount based on selected projects
@@ -75,9 +77,24 @@ const CreateInvoiceForm = ({ selectedProjects }) => {
 
       {/* Total Amount */}
       <div className="total-amount mb-4">
-        <h3 className="text-lg">
-          Total Billing Amount: ${totalAmount.toFixed(2)}
-        </h3>
+        <label>Billing Period:</label>
+        <input
+          className="text-lg"
+          value={billingPeriod}
+          type="text"
+          onChange={(e) => setBillingPeriod(e.target.value)}
+          required
+        />
+      </div>
+      <div className="billing_period mb-4">
+        <label>Billing Amount:</label>
+        <input
+          className="text-lg"
+          value={billingAmount}
+          type="number"
+          onChange={(e) => setBillingAmount(e.target.value).toFixed(2)}
+          required
+        />
       </div>
 
       {/* Submit Button */}

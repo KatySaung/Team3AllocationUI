@@ -22,15 +22,7 @@ const Invoice = () => {
   }, []);
 
   return (
-    <div className="invoive__container">
-      <h1 className="invoice__title">Invoice</h1>
-      <div className="invoice__body">body here</div>
-      <div className="invoive__billDate">billDate</div>
-      <div className="invoive__billingAmount">billingAmount</div>
-      <p className="invoive__paymentStatus"></p>
-      <div className="invoive__billingPeriod">billingPeriod</div>
-      <p>and more stuff to add and create </p>
-      <div className="invoice-page container mx-auto p-8"></div>
+    <div className="invoice-page container mx-auto p-8">
       <h1 className="text-3xl font-bold text-center mb-8">Create Invoice</h1>
 
       {/* Project Selector */}

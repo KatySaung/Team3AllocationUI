@@ -14,16 +14,16 @@ const InvoiceList = () => {
     }
   };
 
-  const fetchRevenueForLastMonth = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:8080/api/invoice/revenue/last-month"
-      );
-      setRevenue(response.data);
-    } catch (error) {
-      console.error("Error fetching revenue:", error);
-    }
-  };
+  // const fetchRevenueForLastMonth = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       "http://localhost:8080/api/invoice/revenue/last-month"
+  //     );
+  //     setRevenue(response.data);
+  //   } catch (error) {
+  //     console.error("Error fetching revenue:", error);
+  //   }
+  // };
 
   const deleteInvoice = async (id) => {
     try {
