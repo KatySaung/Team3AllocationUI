@@ -1,147 +1,140 @@
-import { useState } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
 
-import Skills from "../Skills/Skills";
+function EmployeeModal({ onClose, project }) {
+  const projects = [
+    {
+      id: 1,
+      name: "Website Redesign",
+      client: "Tech Solutions Ltd.",
+      description: "Redesigning the corporate website with modern UI.",
+      skills: ["React", "Tailwind CSS", "UI/UX Design"],
+      startDate: "2023-08-01",
+      endDate: "2023-12-01",
+    },
+    {
+      id: 2,
+      name: "Mobile App Development",
+      client: "Marketing Experts Inc.",
+      description:
+        "Building a cross-platform mobile app for client engagement.",
+      skills: ["React Native", "API Integration", "Design Patterns"],
+      startDate: "2023-05-01",
+      endDate: "2023-11-15",
+    },
+    {
+      id: 3,
+      name: "E-commerce Platform",
+      client: "Online Retail Co.",
+      description: "Developing a scalable e-commerce platform.",
+      skills: ["Node.js", "Express", "MongoDB", "React"],
+      startDate: "2023-06-01",
+      endDate: "2023-12-31",
+    },
+    {
+      id: 4,
+      name: "Data Analytics Dashboard",
+      client: "FinTech Analytics",
+      description: "Creating a data visualization dashboard for analytics.",
+      skills: ["Python", "Pandas", "D3.js", "JavaScript"],
+      startDate: "2023-07-01",
+      endDate: "2023-10-30",
+    },
+    {
+      id: 5,
+      name: "Inventory Management System",
+      client: "Warehouse Solutions Inc.",
+      description: "Building a system to manage warehouse inventory.",
+      skills: ["Java", "Spring Boot", "MySQL"],
+      startDate: "2023-04-01",
+      endDate: "2023-09-01",
+    },
+    {
+      id: 6,
+      name: "HR Portal",
+      client: "People Solutions",
+      description: "Developing an employee management and HR portal.",
+      skills: ["Angular", "TypeScript", "Node.js", "Express"],
+      startDate: "2023-02-01",
+      endDate: "2023-06-01",
+    },
+    {
+      id: 7,
+      name: "Social Media Integration",
+      client: "Brand Connect",
+      description: "Integrating social media platforms for brand engagement.",
+      skills: ["API Integration", "OAuth", "JavaScript"],
+      startDate: "2023-03-01",
+      endDate: "2023-07-01",
+    },
+    {
+      id: 8,
+      name: "IoT Home Automation",
+      client: "Smart Home Innovations",
+      description: "Developing IoT solutions for home automation.",
+      skills: ["IoT", "Python", "AWS IoT", "Embedded Systems"],
+      startDate: "2023-01-15",
+      endDate: "2023-05-30",
+    },
+    {
+      id: 9,
+      name: "Blockchain Voting System",
+      client: "GovTech Solutions",
+      description: "Creating a secure voting system using blockchain.",
+      skills: ["Blockchain", "Solidity", "Web3.js"],
+      startDate: "2023-08-01",
+      endDate: "2023-12-31",
+    },
+    {
+      id: 10,
+      name: "Healthcare App",
+      client: "MedTech Innovators",
+      description: "Building an app for patient-doctor communication.",
+      skills: ["Flutter", "Firebase", "UX/UI Design"],
+      startDate: "2023-05-01",
+      endDate: "2023-11-01",
+    },
+  ];
 
-const EmployeeModal = ({ employee, onClose, onUpdate }) => {
-  const [formData, setFormData] = useState({
-    fullName: employee.fullName || "",
-    title: employee.title || "",
-    salary: employee.salary || 0,
-    totalHoursWorked: employee.totalHoursWorked || "00:00:00",
-    rateCardId: employee.rateCardId || 0,
-    skills: employee.skills || [],
-    status: employee.status || false,
-  });
+  const [selectedProject, setSelectedProject] = useState(null);
 
-  const handleSkillSelect = (skill) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      skills: prevData.skills.includes(skill)
-        ? prevData.skills.filter((s) => s !== skill)
-        : [...prevData.skills, skill],
-    }));
-  };
+  // Select a random project on component mount
+  useEffect(() => {
+    const randomProject = projects[Math.floor(Math.random() * projects.length)];
+    setSelectedProject(randomProject);
+  }, []);
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const handleSave = async () => {
-    try {
-      const { fullName, title, salary, totalHoursWorked, rateCardId, skills, status } = formData;
-      const payload = { fullName, title, salary, totalHoursWorked, rateCardId, skills, status };
-
-      await axios.put(`http://localhost:8080/api/employees/${employee.id}`, payload);
-      onUpdate();
-      onClose();
-    } catch (error) {
-      console.error("Error updating employee:", error);
-    }
-  };
+  // If selectedProject is null, return nothing
+  if (!selectedProject) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Edit Employee</h2>
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+      <div className="bg-white p-6 rounded shadow-md w-1/2">
+        <h2 className="text-xl font-semibold mb-4">{selectedProject.name}</h2>
+        <p>
+          <strong>Client:</strong> {selectedProject.client}
+        </p>
+        <p>
+          <strong>Description:</strong> {selectedProject.description}
+        </p>
+        <p>
+          <strong>Skills Required:</strong> {selectedProject.skills.join(", ")}
+        </p>
+        <p>
+          <strong>Start Date:</strong> {selectedProject.startDate}
+        </p>
+        <p>
+          <strong>End Date:</strong> {selectedProject.endDate}
+        </p>
 
-        {/* Full Name */}
-        <div className="mb-4">
-          <label className="block text-gray-700">Full Name</label>
-          <input
-            type="text"
-            name="fullName"
-            value={formData.fullName}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-          />
-        </div>
-
-        {/* Title */}
-        <div className="mb-4">
-          <label className="block text-gray-700">Title</label>
-          <input
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-          />
-        </div>
-
-        {/* Total Hours Worked */}
-        <div className="mb-4">
-          <label className="block text-gray-700">Total Hours Worked</label>
-          <input
-            type="time"
-            name="totalHoursWorked"
-            value={formData.totalHoursWorked}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-          />
-        </div>
-
-        {/* Salary */}
-        <div className="mb-4">
-          <label className="block text-gray-700">Salary</label>
-          <input
-            type="number"
-            name="salary"
-            value={formData.salary}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-          />
-        </div>
-
-        {/* Rate Card ID */}
-        <div className="mb-4">
-          <label className="block text-gray-700">Rate Card ID</label>
-          <input
-            type="number"
-            name="rateCardId"
-            value={formData.rateCardId}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-          />
-        </div>
-
-        {/* Status */}
-        <div className="mb-4">
-          <label className="block text-gray-700">Status</label>
-          <input
-            type="checkbox"
-            name="status"
-            checked={formData.status}
-            onChange={handleChange}
-            className="mr-2"
-          />
-        </div>
-
-        {/* Skills */}
-        <Skills selectedSkills={formData.skills} onSkillSelect={handleSkillSelect} />
-
-        {/* Save and Cancel Buttons */}
-        <div className="mt-6 flex justify-end space-x-4">
-          <button
-            onClick={onClose}
-            className="bg-gray-300 hover:bg-gray-400 text-gray-700 font-medium py-2 px-4 rounded-lg"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleSave}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg"
-          >
-            Save Changes
-          </button>
-        </div>
+        <button
+          onClick={() => setSelectedProject(null)}
+          className="mt-6 bg-red-500 text-white px-4 py-2 rounded"
+        >
+          Close
+        </button>
       </div>
     </div>
   );
-};
+}
 
 export default EmployeeModal;

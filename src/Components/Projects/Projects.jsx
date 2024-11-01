@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import ProjectsList from "./ProjectsList";
 import CreateProjectModal from "./CreateProjectModal";
@@ -48,11 +48,7 @@ function Projects() {
   }, [searchName]);
 
   return (
-    <div className="bg-indigo-500 min-h-screen p-8">
-      <h1 className="text-3xl font-extrabold text-center text-blue-700 mb-8">
-        Projects
-      </h1>
-
+    <div className=" min-h-screen p-8">
       {/* Search bar */}
       <div className="mb-6">
         <input

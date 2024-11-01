@@ -17,7 +17,7 @@ function NavBar() {
       setLastMonthRevenue(lastMonthResp.data);
 
       const currentMonthResp = await axios.get(
-        `http://localhost:8080/api/invoice/calculate_revenue/10`
+        `http://localhost:8080/api/invoice/calculate_revenue/09`
       );
       setCurrentMonthRevenue(currentMonthResp.data);
     } catch (error) {
@@ -27,7 +27,7 @@ function NavBar() {
 
   useEffect(() => {
     fetchRevenues();
-    const interval = setInterval(fetchRevenues, 3600000);
+    const interval = setInterval(fetchRevenues, 3000);
     return () => clearInterval(interval);
   }, []);
 
