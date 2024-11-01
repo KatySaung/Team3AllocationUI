@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import ProjectSelector from "./ProjectSelector";
+import CreateInvoiceForm from "./CreateInvoiceForm";
 
-function Invoice() {
+const Invoice = () => {
+  const [projects, setProjects] = useState([]);
+  const [selectedProjects, setSelectedProjects] = useState([]);
+
+  useEffect(() => {
+    // Fetch available projects
+    const fetchProjects = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/projects");
+        setProjects(response.data);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
   return (
     <div className="invoive__container">
       <h1 className="invoice__title">Invoice</h1>
@@ -9,9 +29,21 @@ function Invoice() {
       <div className="invoive__billingAmount">billingAmount</div>
       <p className="invoive__paymentStatus"></p>
       <div className="invoive__billingPeriod">billingPeriod</div>
-      <p>and more stuff</p>
+      <p>and more stuff to add and create </p>
+      <div className="invoice-page container mx-auto p-8"></div>
+      <h1 className="text-3xl font-bold text-center mb-8">Create Invoice</h1>
+
+      {/* Project Selector */}
+      <ProjectSelector
+        projects={projects}
+        selectedProjects={selectedProjects}
+        setSelectedProjects={setSelectedProjects}
+      />
+
+      {/* Create Invoice Form */}
+      <CreateInvoiceForm selectedProjects={selectedProjects} />
     </div>
   );
-}
+};
 
 export default Invoice;
