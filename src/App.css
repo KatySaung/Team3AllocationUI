@@ -1,7 +1,14 @@
 .home {
   /* display: flex;
+<<<<<<< HEAD
     justify-content: center;
     align-items: center;
     flex-direction: column;
     background-color: rgb(191, 226, 15); */
+=======
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(191, 226, 15); */
+>>>>>>> 76abfce1058e4781a90ce9716d7a96d400d2a6e6
 }

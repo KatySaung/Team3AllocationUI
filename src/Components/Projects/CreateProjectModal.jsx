@@ -4,35 +4,33 @@ import axios from "axios";
 const CreateProjectModal = ({ setShowModal, setProjects }) => {
   const [createProject, setCreateProject] = useState({
     name: "",
+    clientId: "",
     description: "",
     skills: "",
     startDate: "",
     endDate: "",
   });
   const [contractId, setContractId] = useState("");
-  const [clientId, setClientId] = useState("");
 
   const handleCreateProject = async (e) => {
     e.preventDefault();
 
     const formattedProject = {
       ...createProject,
+      clientId: parseInt(createProject.clientId, 10),
       skills: createProject.skills.split(",").map((skill) => skill.trim()),
-      clientId: parseInt(clientId, 10),
+      contractId: contractId,
     };
 
     try {
-      console.log(`Contract ID: ${contractId}, Client ID: ${clientId}`);
-      console.log("Formatted Project:", formattedProject);
       const response = await axios.post(
-        `http://localhost:8080/api/projects/create?contractId=${contractId}`,
+        "http://localhost:8080/api/projects/create",
         formattedProject
       );
       setProjects((prevProjects) => [...prevProjects, response.data]);
       setShowModal(false);
       resetCreateProject();
     } catch (error) {
-      console.error("Error creating project:", error);
       alert("Failed to create project. Please try again.");
     }
   };
@@ -40,13 +38,13 @@ const CreateProjectModal = ({ setShowModal, setProjects }) => {
   const resetCreateProject = () => {
     setCreateProject({
       name: "",
+      clientId: "",
       description: "",
       skills: "",
       startDate: "",
       endDate: "",
     });
     setContractId("");
-    setClientId("");
   };
 
   return (
@@ -68,7 +66,9 @@ const CreateProjectModal = ({ setShowModal, setProjects }) => {
             type="text"
             placeholder="Client ID"
             value={createProject.clientId}
-            onChange={(e) => setClientId(e.target.value)}
+            onChange={(e) =>
+              setCreateProject({ ...createProject, clientId: e.target.value })
+            }
             className="border p-2 mb-2 w-full"
             required
           />
@@ -118,7 +118,6 @@ const CreateProjectModal = ({ setShowModal, setProjects }) => {
             value={contractId}
             onChange={(e) => setContractId(e.target.value)}
             className="border p-2 mb-4 w-full"
-            required
           />
 
           <div className="flex justify-end space-x-2">

@@ -1,0 +1,24 @@
+/* Responsive Card and Table Styling */
+@media (min-width: 768px) {
+    .projects-list {
+      display: table;
+      width: 100%;
+    }
+    .project-card {
+      display: table-row;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card {
+      margin-bottom: 1rem;
+      border: 1px solid #e5e7eb;
+      padding: 1rem;
+      border-radius: 0.5rem;
+    }
+  }
+  
