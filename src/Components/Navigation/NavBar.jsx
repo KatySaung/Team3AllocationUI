@@ -7,7 +7,7 @@ function NavBar() {
   const [currentMonthRevenue, setCurrentMonthRevenue] = useState(0);
   const [lastMonthRevenue, setLastMonthRevenue] = useState(0);
 
-  // Fetch last month and current month revenue
+
   const fetchRevenues = async () => {
     try {
       //! Fetching monthly revenues
@@ -44,6 +44,7 @@ function NavBar() {
 
   return (
     <nav className="bg-blue-800 text-white p-4 sticky top-0 z-50 flex space-x-4 items-center">
+      <h1 className="nav_title">PeopleGrid</h1>
       {[
         "home",
         "about",

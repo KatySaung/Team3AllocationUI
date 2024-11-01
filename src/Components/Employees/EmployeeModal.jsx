@@ -1,18 +1,42 @@
 import { useState } from "react";
 import axios from "axios";
 
-const EmployeeModal = ({ employee, onClose, onUpdate }) => {
-  const [formData, setFormData] = useState({ ...employee });
+import Skills from "../Skills/Skills";
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+const EmployeeModal = ({ employee, onClose, onUpdate }) => {
+  const [formData, setFormData] = useState({
+    fullName: employee.fullName || "",
+    title: employee.title || "",
+    salary: employee.salary || 0,
+    totalHoursWorked: employee.totalHoursWorked || "00:00:00",
+    rateCardId: employee.rateCardId || 0,
+    skills: employee.skills || [],
+    status: employee.status || false,
+  });
+
+  const handleSkillSelect = (skill) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      skills: prevData.skills.includes(skill)
+        ? prevData.skills.filter((s) => s !== skill)
+        : [...prevData.skills, skill],
+    }));
   };
 
-  const handleUpdate = async (e) => {
-    e.preventDefault();
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleSave = async () => {
     try {
-      await axios.put(`http://localhost:8080/api/employees/${employee.id}`, formData);
+      const { fullName, title, salary, totalHoursWorked, rateCardId, skills, status } = formData;
+      const payload = { fullName, title, salary, totalHoursWorked, rateCardId, skills, status };
+
+      await axios.put(`http://localhost:8080/api/employees/${employee.id}`, payload);
       onUpdate();
       onClose();
     } catch (error) {
@@ -20,81 +44,101 @@ const EmployeeModal = ({ employee, onClose, onUpdate }) => {
     }
   };
 
-  const handleDelete = async () => {
-    try {
-      await axios.delete(`http://localhost:8080/api/employees/${employee.id}`);
-      onUpdate();
-      onClose();
-    } catch (error) {
-      console.error("Error deleting employee:", error);
-    }
-  };
-
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
-        <h2 className="text-2xl mb-4">Employee Details</h2>
-        <form onSubmit={handleUpdate}>
-          <label className="block mb-2">
-            <span className="text-gray-700">Name:</span>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="border p-2 w-full"
-              required
-            />
-          </label>
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+      <div className="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Edit Employee</h2>
 
-          <label className="block mb-2">
-            <span className="text-gray-700">Status:</span>
-            <select
-              name="status"
-              value={formData.status}
-              onChange={handleChange}
-              className="border p-2 w-full"
-              required
-            >
-              <option value="available">Available</option>
-              <option value="unavailable">Unavailable</option>
-            </select>
-          </label>
+        {/* Full Name */}
+        <div className="mb-4">
+          <label className="block text-gray-700">Full Name</label>
+          <input
+            type="text"
+            name="fullName"
+            value={formData.fullName}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+        </div>
 
-          <label className="block mb-4">
-            <span className="text-gray-700">Available From:</span>
-            <input
-              type="date"
-              name="availableFrom"
-              value={formData.availableFrom}
-              onChange={handleChange}
-              className="border p-2 w-full"
-            />
-          </label>
+        {/* Title */}
+        <div className="mb-4">
+          <label className="block text-gray-700">Title</label>
+          <input
+            type="text"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+        </div>
 
-          <div className="flex justify-end space-x-2">
-            <button
-              type="button"
-              onClick={handleDelete}
-              className="bg-red-500 text-white px-4 py-2 rounded"
-            >
-              Delete
-            </button>
-            <button
-              type="button"
-              onClick={onClose}
-              className="bg-gray-500 text-white px-4 py-2 rounded"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded"
-            >
-              Save Changes
-            </button>
-          </div>
-        </form>
+        {/* Total Hours Worked */}
+        <div className="mb-4">
+          <label className="block text-gray-700">Total Hours Worked</label>
+          <input
+            type="time"
+            name="totalHoursWorked"
+            value={formData.totalHoursWorked}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+        </div>
+
+        {/* Salary */}
+        <div className="mb-4">
+          <label className="block text-gray-700">Salary</label>
+          <input
+            type="number"
+            name="salary"
+            value={formData.salary}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+        </div>
+
+        {/* Rate Card ID */}
+        <div className="mb-4">
+          <label className="block text-gray-700">Rate Card ID</label>
+          <input
+            type="number"
+            name="rateCardId"
+            value={formData.rateCardId}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+        </div>
+
+        {/* Status */}
+        <div className="mb-4">
+          <label className="block text-gray-700">Status</label>
+          <input
+            type="checkbox"
+            name="status"
+            checked={formData.status}
+            onChange={handleChange}
+            className="mr-2"
+          />
+        </div>
+
+        {/* Skills */}
+        <Skills selectedSkills={formData.skills} onSkillSelect={handleSkillSelect} />
+
+        {/* Save and Cancel Buttons */}
+        <div className="mt-6 flex justify-end space-x-4">
+          <button
+            onClick={onClose}
+            className="bg-gray-300 hover:bg-gray-400 text-gray-700 font-medium py-2 px-4 rounded-lg"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleSave}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg"
+          >
+            Save Changes
+          </button>
+        </div>
       </div>
     </div>
   );
