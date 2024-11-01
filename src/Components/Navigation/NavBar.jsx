@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -44,14 +44,17 @@ function NavBar() {
 
   return (
     <nav className="bg-blue-800 text-white p-4 sticky top-0 z-50 flex space-x-4 items-center">
-      <h1 className="nav_title">PeopleGrid</h1>
+      <h1 className="nav_title">
+        <div className="title">PeopleGrid</div>
+      </h1>
       {[
         "home",
-        "about",
         "clients",
+         "contracts",
         "employees",
         "rating",
-        "contracts",
+       
+        "projects",
         "contact",
       ].map((section) => (
         <Link

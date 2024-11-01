@@ -1,17 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import hero1 from "../../assets/images/hero1.jpg";
+import hero2 from "../../assets/images/hero2.jpg";
+import hero3 from "../../assets/images/hero3.jpg";
+import hero4 from "../../assets/images/hero4.jpg";
 const Hero = () => {
   const navigate = useNavigate();
   const [currentImage, setCurrentImage] = useState(0);
 
-  const images = [
-    hero1,
-    "https://via.placeholder.com/200x200.png?text=Image+2",
-    "https://via.placeholder.com/200x200.png?text=Image+3",
-    "https://via.placeholder.com/200x200.png?text=Image+4",
-    "https://via.placeholder.com/200x200.png?text=Image+5",
-  ];
+  const images = [hero1, hero2, hero3, hero4];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -28,7 +25,7 @@ const Hero = () => {
     <div className="bg-[#0a0a1a] text-white min-h-screen flex items-center p-6 lg:p-16">
       {/* Left Side Image Carousel */}
       <div className=" w-1/2  hidden lg:flex flex-col space-y-4 mr-8">
-        <div className="w-64 h-64 overflow-hidden rounded-lg shadow-lg border-4 border-gray-800 transition-transform duration-500 ease-in-out transform hover:scale-105">
+        <div className="w-full h-full overflow-hidden rounded-lg shadow-lg border-4 border-gray-800 transition-transform duration-500 ease-in-out transform hover:scale-105">
           <img
             src={images[currentImage]}
             alt="Shuffling Images"
@@ -40,7 +37,7 @@ const Hero = () => {
       {/* Center Text Content */}
       <div className=" w-1/2 text-center lg:text-left">
         <h1 className="text-5xl lg:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-blue-500 to-purple-500">
-          PeopleGrid
+          People Grid
         </h1>
         <p className="text-lg lg:text-xl text-gray-300 mt-4 max-w-md">
           Your ultimate solution for resource allocation, skill matching, and
